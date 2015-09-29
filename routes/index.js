@@ -5,15 +5,15 @@ var unirest = require('unirest');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'NY Times Hardcover Fiction Novels' });
 });
 
 router.get('/books', function(req, res) {
     unirest.get('http://api.nytimes.com/svc/books/v3/lists/hardcover-fiction.json?api-key=' + process.env.NYT_API_KEY)
       .end(function (response) {
-        console.log(response.body);
-        res.end('Done')
-      })
+        var books = response.body.results.books;
+        res.render('books/index', { allBooks: books })
+      })  
 })
 
 module.exports = router;

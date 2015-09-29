@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+
+  h1 List of Books
+
+  table
+    thead
+      tr
+        th Book Name
+        th Author
+    tbody
+      for book in allBooks
+        tr
+          td= book.title
+          td= book.author
+
+  a(href='/') Homepage
